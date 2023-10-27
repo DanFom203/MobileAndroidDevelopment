@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="questions_numbers">
+        <item>1 Вопрос</item>
+        <item>2 Вопрос</item>
+        <item>3 Вопрос</item>
+        <item>4 Вопрос</item>
+        <item>5 Вопрос</item>
+        <item>6 Вопрос</item>
+        <item>7 Вопрос</item>
+        <item>8 Вопрос</item>
+        <item>9 Вопрос</item>
+        <item>10 Вопрос</item>
+    </string-array>
+    <string-array name="questions">
+        <item>What color is school desk in Russia?</item>
+        <item>What color is banana?</item>
+        <item>What color is grass?</item>
+        <item>What color is falling snow?</item>
+        <item>What color is clear sky?</item>
+        <item>What color is TV screen, when it is off?</item>
+    </string-array>
+    <string-array name="options">
+        <item>Желтый</item>
+        <item>Красный</item>
+        <item>Синий</item>
+        <item>Белый</item>
+        <item>Черный</item>
+        <item>Фиолетовый</item>
+        <item>Оранжевый</item>
+        <item>Фиолетовый</item>
+        <item>Голубой</item>
+        <item>Зеленый</item>
+    </string-array>
+</resources>
