@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.fragments.navigation.NotificationSettingsFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notification_priority_settings_header_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:text="@string/priority_settings"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notification_priority_settings_header_tv">
+
+            <RadioButton
+                android:id="@+id/radioButtonMedium1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/medium" />
+
+            <RadioButton
+                android:id="@+id/radioButtonHigh1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/high" />
+
+            <RadioButton
+                android:id="@+id/radioButtonUrgent1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/urgent" />
+
+        </RadioGroup>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notification_privacy_settings_header_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:text="@string/privacy_settings"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupPriority" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupPrivacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notification_privacy_settings_header_tv">
+
+            <RadioButton
+                android:id="@+id/radioButtonMedium2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/public_" />
+
+            <RadioButton
+                android:id="@+id/radioButtonHigh2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/secret" />
+
+            <RadioButton
+                android:id="@+id/radioButtonUrgent2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/private_" />
+        </RadioGroup>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/extended_message_header_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:text="@string/extended_message"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/detailed_message_cb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/detailed_message_cb"
+            app:layout_constraintBottom_toBottomOf="@+id/detailed_message_cb" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/detailed_message_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupPrivacy"
+            app:layout_constraintStart_toEndOf="@+id/extended_message_header_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/buttons_visibility_header_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:text="@string/buttons_visibility"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/buttons_visibility_cb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/buttons_visibility_cb"
+            app:layout_constraintBottom_toBottomOf="@+id/buttons_visibility_cb" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/buttons_visibility_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailed_message_cb"
+            app:layout_constraintStart_toEndOf="@+id/buttons_visibility_header_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

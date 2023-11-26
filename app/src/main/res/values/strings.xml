@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">AndroidHomework</string>
+    <string name="priority_settings">Блок настройки важности уведомления</string>
+    <string name="privacy_settings">Блок настройки приватности уведомления</string>
+    <string name="extended_message">Подробный текст уведомления</string>
+    <string name="buttons_visibility">Видимость кнопок в уведомлении</string>
+    <string name="medium">Low</string>
+    <string name="high">Medium</string>
+    <string name="urgent">Urgent</string>
+    <string name="notification_header">Заголовок уведомления</string>
+    <string name="notification_message">Сообщение уведомления</string>
+    <string name="notification_btn_text">Показать уведомление</string>
+    <string name="my_channel_id">my_channel_id</string>
+    <string name="my_channel">My Channel</string>
+    <string name="main_screen">Главный Экран</string>
+    <string name="notifications">Уведомления</string>
+    <string name="coroutines">Корутины</string>
+    <string name="secret">Secret</string>
+    <string name="private_">Private</string>
+    <string name="public_">Public</string>
+    <string name="execute">Выполнить</string>
+    <string name="stop_on_background">Stop on background</string>
+    <string name="async">Async</string>
+    <string name="number_of_running_coroutines">Количество запущенных корутин</string>
 </resources>
