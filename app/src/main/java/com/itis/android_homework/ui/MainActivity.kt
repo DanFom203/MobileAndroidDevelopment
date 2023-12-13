@@ -1,6 +1,11 @@
 package com.itis.android_homework.ui
 
 import android.os.Bundle
+import android.view.View
+import androidx.navigation.NavDestination
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.itis.android_homework.base.BaseActivity
 import com.itis.android_homework.base.BaseFragment
 import com.itis.android_homework.utils.ActionType
@@ -16,17 +21,38 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .add(
-                    fragmentContainerId,
-                    SignInFragment(),
-                    SignInFragment.SIGN_IN_FRAGMENT_TAG,
-                )
-                .commit()
+        val controller =
+            (supportFragmentManager.findFragmentById(fragmentContainerId) as NavHostFragment)
+                .navController
+
+        findViewById<BottomNavigationView>(R.id.main_bnv).apply {
+            setupWithNavController(controller)
+        }
+
+        controller.addOnDestinationChangedListener { _, destination, _ ->
+            handleBottomNavigationViewVisibility(destination)
         }
     }
 
+    private fun handleBottomNavigationViewVisibility(destination: NavDestination) {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_bnv)
+
+        val shouldShowBottomNav = when (destination.id) {
+            R.id.mainScreenFragment, R.id.addingMovieFragment, R.id.profileFragment -> true
+            else -> false
+        }
+
+        bottomNavigationView.visibility = if (shouldShowBottomNav) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+
+//        if (shouldShowBottomNav && destination.id == R.id.mainScreenFragment) {
+//            // Отобразите BottomNavigationView, так как фрагмент MainScreenFragment добавлен в BackStack
+//            bottomNavigationView.visibility = View.VISIBLE
+//        }
+    }
 
     override fun goToScreen(
         actionType: ActionType,

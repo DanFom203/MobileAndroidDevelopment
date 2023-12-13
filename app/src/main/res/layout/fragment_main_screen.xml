@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light">
+    android:background="@android:color/background_light"
+    tools:context=".ui.fragments.MainScreenFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,23 +17,42 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Horizontal RecyclerView for favorite movies -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewFavoriteMovies"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/header_profile_screen_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:background="#4CAF50"
+                android:gravity="center"
+                android:text="@string/main_screen"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favourite_movies_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"
                 tools:listitem="@layout/item_movie_horizontal"/>
 
-            <!-- Vertical RecyclerView for all movies -->
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/favourite_movies_rv" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewAllMovies"
+                android:id="@+id/all_movies_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:spanCount="2"
                 android:layout_marginTop="16dp"
                 tools:listitem="@layout/item_movie_vertical"/>
@@ -40,13 +60,12 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- FloatingActionButton for adding movies -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddMovie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_margin="8dp"
         app:srcCompat="@android:drawable/ic_input_add"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

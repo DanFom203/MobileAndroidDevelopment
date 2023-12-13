@@ -10,5 +10,7 @@ data class MovieEntity(
     @ColumnInfo(name = "title")
     val title: String,
     val year: Int,
-    val description: String
+    val description: String,
+    @ColumnInfo(name = "is_liked")
+    var isLiked: Boolean
 )

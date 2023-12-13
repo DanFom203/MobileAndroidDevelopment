@@ -52,6 +52,8 @@ android {
 dependencies {
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     val coreCtxVersion = "1.9.0"
     implementation("androidx.core:core-ktx:$coreCtxVersion")
 

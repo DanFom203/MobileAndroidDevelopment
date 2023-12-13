@@ -13,8 +13,8 @@ import com.itis.android_homework.db.typeconverters.UserGsonTypeConverter
     entities = [UserEntity::class, MovieEntity::class],
     version = 1
 )
-// @TypeConverters(UserTypeConverter::class)
-@TypeConverters(UserGsonTypeConverter::class)
+//@TypeConverters(UserTypeConverter::class)
+//@TypeConverters(UserGsonTypeConverter::class)
 abstract class InceptionDatabase : RoomDatabase() {
 
     abstract val userDao: UserDao

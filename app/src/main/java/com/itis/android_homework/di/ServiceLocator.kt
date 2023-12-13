@@ -10,22 +10,19 @@ object ServiceLocator {
 
     private var dbInstance: InceptionDatabase? = null
 
-    private var inceptionPref: SharedPreferences? = null
+//    private var inceptionPref: SharedPreferences? = null
 
     fun initData(ctx: Context) {
-        dbInstance = Room.databaseBuilder(ctx, InceptionDatabase::class.java, "inception.db")
+        dbInstance = Room.databaseBuilder(ctx, InceptionDatabase::class.java, "inception_db").build()
 //            .addMigrations(
 //                MIGRATION_1_2()
 //            )
-            .build()
 
-        inceptionPref = ctx.getSharedPreferences("inception_pref", Context.MODE_PRIVATE)   }
+
+//        inceptionPref = ctx.getSharedPreferences("inception_pref", Context.MODE_PRIVATE)
+        }
 
     fun getDbInstance(): InceptionDatabase {
         return dbInstance ?: throw IllegalStateException("Db not initialized")
     }
-
-//    fun getSharedPreferences(): SharedPreferences {
-//        return inceptionPref ?: throw IllegalStateException("Preferences not initialized")
-//    }
 }

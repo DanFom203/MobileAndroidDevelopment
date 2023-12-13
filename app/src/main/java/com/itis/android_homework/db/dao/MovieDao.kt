@@ -8,8 +8,8 @@ import com.itis.android_homework.db.entity.MovieEntity
 
 @Dao
 interface MovieDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovie(movie: MovieEntity): String
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    fun insertMovie(movie: MovieEntity)
 
     @Query("SELECT * FROM films ORDER BY year DESC")
     fun getAllMovies(): List<MovieEntity>

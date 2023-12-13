@@ -14,26 +14,23 @@ import com.itis.android_homework.db.entity.tuple.UserIdTuple
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    fun addUser(userData: UserEntity)
+    suspend fun addUser(userData: UserEntity)
 
     @Query("SELECT * FROM users")
-    fun getAllUsers(): List<UserEntity>?
+    suspend fun getAllUsers(): List<UserEntity>?
 
     @Query("SELECT * FROM users WHERE id = :userId")
-    fun getUserInfoById(userId: String): UserEntity?
+    suspend fun getUserInfoById(userId: String): UserEntity?
 
     @Query("SELECT * FROM users WHERE email = :email")
-    fun getUserInfoByEmail(email: String): UserEntity?
-
-    @Update(entity = UserEntity::class)
-    fun updateUserAddress(data: UserAddressTuple)
+    suspend fun getUserInfoByEmail(email: String): UserEntity?
 
     @Query("UPDATE users SET email = :emailAddress WHERE id = :id")
-    fun updateUserAddressQuery(id: String, emailAddress: String)
+    suspend fun updateUserAddressQuery(id: String, emailAddress: String)
 
     @Delete(entity = UserEntity::class)
-    fun deleteUserById(id: UserIdTuple)
+    suspend fun deleteUserById(id: UserIdTuple)
 
     @Query("DELETE FROM users WHERE id = :id")
-    fun deleteUserByIdQuery(id: String)
+    suspend fun deleteUserByIdQuery(id: String)
 }

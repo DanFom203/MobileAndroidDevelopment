@@ -11,4 +11,19 @@
     <string name="phone_number">Phone Number</string>
     <string name="second_name">Second Name</string>
     <string name="movie_name">Movie Name</string>
+    <string name="movie_id">Movie ID</string>
+    <string name="movie_description">Movie Description</string>
+    <string name="movie_year">Movie Year</string>
+    <string name="id">ID</string>
+    <string name="description">Description</string>
+    <string name="main_screen">Main Screen</string>
+    <string name="adding_screen">Adding Screen</string>
+    <string name="profile_screen">Profile Screen</string>
+    <string name="change_phone_number">Change phone number</string>
+    <string name="input_your_new_phone_number">Input your new phone number</string>
+    <string name="change_your_password">Change your password</string>
+    <string name="input_your_new_password">Input your new password</string>
+    <string name="sign_out">Sign-out</string>
+    <string name="adding_movie_screen">Adding Movie Screen</string>
+    <string name="add_movie">Add movie</string>
 </resources>
