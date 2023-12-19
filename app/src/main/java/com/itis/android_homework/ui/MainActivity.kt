@@ -48,10 +48,6 @@ class MainActivity : BaseActivity() {
             View.GONE
         }
 
-//        if (shouldShowBottomNav && destination.id == R.id.mainScreenFragment) {
-//            // Отобразите BottomNavigationView, так как фрагмент MainScreenFragment добавлен в BackStack
-//            bottomNavigationView.visibility = View.VISIBLE
-//        }
     }
 
     override fun goToScreen(

@@ -1,5 +1,6 @@
 package com.itis.android_homework.ui.fragments.auth
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,8 +15,10 @@ import com.itis.android_homework.db.entity.UserEntity
 import com.itis.android_homework.di.ServiceLocator
 import com.itis.android_homework.ui.fragments.MainScreenFragment
 import com.itis.android_homework.utils.ActionType
+import com.itis.android_homework.utils.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SignInFragment: BaseFragment(R.layout.fragment_sign_in) {
 
@@ -27,7 +30,6 @@ class SignInFragment: BaseFragment(R.layout.fragment_sign_in) {
         val navController = findNavController()
 
         viewBinding.redirectActionBtn.setOnClickListener {
-            // Используем NavController для перехода к SignUpFragment
             navController.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
@@ -39,14 +41,28 @@ class SignInFragment: BaseFragment(R.layout.fragment_sign_in) {
                 lifecycleScope.launch(Dispatchers.IO) {
                     val userEntity: UserEntity? = ServiceLocator.getDbInstance().userDao.getUserInfoByEmail(email)
 
-                    lifecycleScope.launch(Dispatchers.Main) {
+                    withContext(Dispatchers.Main) {
                         if (userEntity != null) {
                             if (password == userEntity.password) {
+                                with(viewBinding) {
+                                    emailEt.text?.clear()
+                                    passwordEt.text?.clear()
+                                }
                                 navController.navigate(R.id.action_signInFragment_to_mainScreenFragment)
                                 showToast("Successful Login")
                             } else {
                                 viewBinding.passwordEt.error = "Invalid Password"
                             }
+
+                            val sharedPreferences = requireContext().getSharedPreferences(
+                                "user_session",
+                                Context.MODE_PRIVATE
+                            )
+                            val editor = sharedPreferences.edit()
+                            editor.putString("user_id", userEntity.userId)
+                            editor.putBoolean("is_authenticated", true)
+                            editor.apply()
+
                         } else {
                             showToast("User with this email not exists")
                         }

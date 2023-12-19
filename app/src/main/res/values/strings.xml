@@ -26,4 +26,17 @@
     <string name="sign_out">Sign-out</string>
     <string name="adding_movie_screen">Adding Movie Screen</string>
     <string name="add_movie">Add movie</string>
+    <string name="submit">Submit Changes</string>
+    <string name="delete_movie">Delete movie</string>
+    <string name="image_url">Image URL (optional)</string>
+    <string name="movie_information_screen">Movie Information Screen</string>
+    <string name="average_rating">Average Rating</string>
+    <string name="rating">Rating</string>
+    <string name="go_back">Go Back</string>
+    <string name="delete_user">Delete User</string>
+    <string name="invalid_number">INVALID PHONE NUMBER</string>
+    <string name="invalid_password">INVALID PASSWORD</string>
+    <string name="invalid_email">INVALID EMAIL</string>
+    <string name="invalid_name">INVALID NAME</string>
+    <string name="invalid_second_name">INVALID SECOND</string>
 </resources>

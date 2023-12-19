@@ -6,23 +6,22 @@ import com.itis.android_homework.model.MovieModel
 object MovieMapper {
     fun toModel(entity: MovieEntity): MovieModel {
         return MovieModel(
-            id = entity.id,
+            movieId = entity.movieId,
             title = entity.title,
             year = entity.year,
             description = entity.description,
-            isLiked = entity.isLiked,
+            imgUrl = entity.imgUrl
 
-        // Добавьте другие поля, если необходимо
         )
     }
     fun toEntity(model: MovieModel): MovieEntity {
         return MovieEntity(
-            id = model.id,
+            movieId = model.movieId,
             title = model.title,
             year = model.year,
             description = model.description,
-            isLiked = model.isLiked
-        // Добавьте другие поля, если необходимо
+            imgUrl = model.imgUrl
+
         )
     }
     fun toModelList(entities: List<MovieEntity>): List<MovieModel> {

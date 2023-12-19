@@ -5,40 +5,39 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
-import com.itis.android_homework.databinding.ItemMovieVerticalBinding
+import com.itis.android_homework.databinding.ItemMovieHorizontalBinding
 import com.itis.android_homework.model.MovieModel
+import com.itis.android_homework.ui.holder.FavoriteMoviesViewHolder
 import com.itis.android_homework.ui.holder.MoviesViewHolder
 
-class MoviesAdapter (
+class FavoriteMoviesAdapter (
     private val glide: RequestManager,
     private val onMovieClicked: ((MovieModel) -> Unit),
-    private val onLikeClicked: ((MovieModel) -> Unit),
-    private val onDeleteClicked: ((MovieModel) -> Unit)
+    private val onDeleteFromFavoritesClicked: ((MovieModel) -> Unit),
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var allFilmsList = mutableListOf<MovieModel>()
+    private var favoriteFilmsList = mutableListOf<MovieModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MoviesViewHolder(
-            viewBinding = ItemMovieVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+        return FavoriteMoviesViewHolder(
+            viewBinding = ItemMovieHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onMovieClicked = onMovieClicked,
-            onLikeClicked = onLikeClicked,
-            onDeleteClicked = onDeleteClicked,
+            onDeleteFromFavoritesClicked = onDeleteFromFavoritesClicked,
             glide = glide
         )
     }
 
-    override fun getItemCount(): Int = allFilmsList.size
+    override fun getItemCount(): Int = favoriteFilmsList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as? MoviesViewHolder)?.bindItem(item = allFilmsList[position])
+        (holder as? FavoriteMoviesViewHolder)?.bindItem(item = favoriteFilmsList[position])
 
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItems(list: List<MovieModel>) {
-        allFilmsList.clear()
-        allFilmsList.addAll(list)
+        favoriteFilmsList.clear()
+        favoriteFilmsList.addAll(list)
         notifyDataSetChanged()
     }
 

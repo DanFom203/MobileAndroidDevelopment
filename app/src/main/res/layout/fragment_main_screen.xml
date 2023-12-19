@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
     tools:context=".ui.fragments.MainScreenFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -18,7 +17,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/header_profile_screen_tv"
+                android:id="@+id/header_main_screen_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -33,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/favourite_movies_rv"
+                android:id="@+id/favorite_movies_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="16dp"
@@ -46,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/favourite_movies_rv" />
+                app:layout_constraintTop_toBottomOf="@id/favorite_movies_rv" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/all_movies_rv"
@@ -61,11 +60,11 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddMovie"
+        android:id="@+id/sort_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="8dp"
-        app:srcCompat="@android:drawable/ic_input_add"/>
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/ic_sort" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

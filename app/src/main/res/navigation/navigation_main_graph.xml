@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_profileFragment_to_addingMovieFragment"
             app:destination="@id/addingMovieFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/addingMovieFragment"
@@ -66,6 +72,18 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieInfoFragment"
+        android:name="com.itis.android_homework.ui.fragments.MovieInfoFragment"
+        android:label="item_movie_information"
+        tools:layout="@layout/item_movie_information" >
+        <action
+            android:id="@+id/action_movieInfoFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment" />
     </fragment>
 </navigation>
