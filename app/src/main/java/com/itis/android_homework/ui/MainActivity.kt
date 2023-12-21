@@ -10,8 +10,6 @@ import com.itis.android_homework.base.BaseActivity
 import com.itis.android_homework.base.BaseFragment
 import com.itis.android_homework.utils.ActionType
 import com.itis.android_homework.R
-import com.itis.android_homework.ui.fragments.auth.SignInFragment
-
 
 class MainActivity : BaseActivity() {
 
@@ -50,35 +48,4 @@ class MainActivity : BaseActivity() {
 
     }
 
-    override fun goToScreen(
-        actionType: ActionType,
-        destination: BaseFragment,
-        tag: String?,
-        isAddToBackStack: Boolean,
-    ) {
-        supportFragmentManager.beginTransaction().apply {
-            when (actionType) {
-                ActionType.ADD -> {
-                    this.add(fragmentContainerId, destination, tag)
-                }
-
-                ActionType.REPLACE -> {
-                    this.replace(fragmentContainerId, destination, tag)
-                }
-
-                ActionType.REMOVE -> {
-                    this.remove(destination)
-                }
-
-                else -> Unit
-            }
-            if (isAddToBackStack) {
-                this.addToBackStack(null)
-            }
-        }.commit()
-    }
-
-    companion object {
-        private const val CAMERA_REQUEST_CODE = 12101
-    }
 }

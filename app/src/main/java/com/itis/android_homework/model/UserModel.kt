@@ -6,4 +6,5 @@ data class UserModel(
     val secondName: String,
     val phoneNumber: String,
     val emailAddress: String?,
+    val deletionTime: Long?
 )

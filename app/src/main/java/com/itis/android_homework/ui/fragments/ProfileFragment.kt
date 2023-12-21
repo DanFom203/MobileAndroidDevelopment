@@ -3,7 +3,6 @@ package com.itis.android_homework.ui.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -14,6 +13,7 @@ import com.itis.android_homework.db.entity.UserEntity
 import com.itis.android_homework.di.ServiceLocator
 import com.itis.android_homework.model.UserModel
 import com.itis.android_homework.ui.mappers.UserMapper
+import com.itis.android_homework.utils.CurrencyTextWatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -52,20 +52,29 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile){
                 }
             }
 
+            viewBinding.userNewPhoneNumberEt.addTextChangedListener(CurrencyTextWatcher())
+
             viewBinding.submitActionBtn.setOnClickListener {
                 val newPhoneNumber: String = viewBinding.userNewPhoneNumberEt.text.toString()
                 val newPassword: String = viewBinding.userNewPasswordEt.text.toString()
 
-                if (newPhoneNumber != "") {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        ServiceLocator.getDbInstance().userDao.updateUserPhoneNumber(
-                            userId,
-                            newPhoneNumber
-                        )
+                lifecycleScope.launch {
+                    val userWithSamePhoneNumber = withContext(Dispatchers.IO) {
+                        ServiceLocator.getDbInstance().userDao.getUserInfoByPhoneNumber(newPhoneNumber)
                     }
-                    viewBinding.userPhoneNumberTv.text = newPhoneNumber
-                    showToast("Phone Number successfully updated")
-                    viewBinding.userNewPhoneNumberEt.text?.clear()
+                    if (newPhoneNumber != "" && userWithSamePhoneNumber == null) {
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            ServiceLocator.getDbInstance().userDao.updateUserPhoneNumber(
+                                userId,
+                                newPhoneNumber
+                            )
+                        }
+                        viewBinding.userPhoneNumberTv.text = newPhoneNumber
+                        showToast("Phone Number successfully updated")
+                        viewBinding.userNewPhoneNumberEt.text?.clear()
+                    } else {
+                        showToast("Try another phone number")
+                    }
                 }
 
                 if (newPassword != "") {
@@ -82,19 +91,30 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile){
 
             viewBinding.signOutActionBtn.setOnClickListener {
                 findNavController().navigateUp()
+
+                val editor = sharedPreferences.edit()
+                editor.putBoolean("is_authenticated", false)
+                editor.apply()
             }
 
             viewBinding.deleteUserActionBtn.setOnClickListener {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    ServiceLocator.getDbInstance().userDao.deleteUserById(userId)
-                }
+                deleteAccount(userId)
                 findNavController().navigateUp()
+
+                val editor = sharedPreferences.edit()
+                editor.putBoolean("is_authenticated", false)
+                editor.apply()
+
                 showToast("Current User was deleted")
             }
         }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    private fun deleteAccount(userId: String) {
+        val currentTime = System.currentTimeMillis()
+        lifecycleScope.launch(Dispatchers.IO) {
+            ServiceLocator.getDbInstance().userDao.updateUserDeletionTime(userId, currentTime)
+        }
     }
+
 }

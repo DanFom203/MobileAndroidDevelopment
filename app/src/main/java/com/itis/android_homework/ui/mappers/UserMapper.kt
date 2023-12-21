@@ -10,7 +10,8 @@ object UserMapper {
             name = entity.name,
             secondName = entity.secondName,
             phoneNumber = entity.phoneNumber,
-            emailAddress = entity.emailAddress
+            emailAddress = entity.emailAddress,
+            deletionTime = entity.deletionTime
             )
     }
 

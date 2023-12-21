@@ -16,5 +16,7 @@ data class UserEntity(
     val phoneNumber: String,
     @ColumnInfo(name = "email")
     val emailAddress: String?,
-    val password: String
+    val password: String,
+    @ColumnInfo(name = "deletion_time")
+    val deletionTime: Long?
 )

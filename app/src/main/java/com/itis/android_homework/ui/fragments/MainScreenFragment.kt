@@ -2,10 +2,8 @@ package com.itis.android_homework.ui.fragments
 
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Movie
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.itis.android_homework.R
 import com.itis.android_homework.base.BaseFragment
 import com.itis.android_homework.databinding.FragmentMainScreenBinding
-import com.itis.android_homework.db.entity.MovieEntity
 import com.itis.android_homework.db.entity.UsersFavouriteMoviesEntity
 import com.itis.android_homework.di.ServiceLocator
 import com.itis.android_homework.model.MovieModel
@@ -168,7 +165,4 @@ class MainScreenFragment : BaseFragment(R.layout.fragment_main_screen) {
         initRecyclerView()
     }
 
-    companion object {
-        const val MAIN_SCREEN_FRAGMENT_TAG = "MAIN_SCREEN_FRAGMENT_TAG"
-    }
 }

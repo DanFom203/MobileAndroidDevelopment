@@ -7,8 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.itis.android_homework.R
 import com.itis.android_homework.base.BaseFragment
 import com.itis.android_homework.databinding.ItemMovieInformationBinding
@@ -33,57 +31,57 @@ class MovieInfoFragment : BaseFragment(R.layout.item_movie_information) {
         val year = arguments?.getInt(YEAR) ?: 0
 
 
-    lifecycleScope.launch {
-        val movieEntity = withContext(Dispatchers.IO) {
-            ServiceLocator.getDbInstance().movieDao.getMovieByTitleAndYear(title, year)
-        }
+        lifecycleScope.launch {
+            val movieEntity = withContext(Dispatchers.IO) {
+                ServiceLocator.getDbInstance().movieDao.getMovieByTitleAndYear(title, year)
+            }
 
-        movieEntity?.let { movie ->
-            with(viewBinding) {
-                val movieId = movie.movieId
-                movieNameTv.text = movie.title
-                movieYearTv.text = movie.year.toString()
-                movieIdTv.text = movieId
-                movieDescTv.text = movie.description
+            movieEntity?.let { movie ->
+                with(viewBinding) {
+                    val movieId = movie.movieId
+                    movieNameTv.text = movie.title
+                    movieYearTv.text = movie.year.toString()
+                    movieIdTv.text = movieId
+                    movieDescTv.text = movie.description
 
-                Glide.with(requireContext())
-                    .load(movie.imgUrl)
-                    .placeholder(R.drawable.loading)
-                    .error(R.drawable.error)
-                    .into(movieIv)
+                    Glide.with(requireContext())
+                        .load(movie.imgUrl)
+                        .placeholder(R.drawable.loading)
+                        .error(R.drawable.error)
+                        .into(movieIv)
 
-                val userRating = withContext(Dispatchers.IO) {
-                    ServiceLocator.getDbInstance().ratingDao.getRatingByUserAndMovieId(
-                        userId!!,
-                        movie.movieId
-                    )
-                }
+                    val userRating = withContext(Dispatchers.IO) {
+                        ServiceLocator.getDbInstance().ratingDao.getRatingByUserAndMovieId(
+                            userId!!,
+                            movie.movieId
+                        )
+                    }
 
-                val averageRating = withContext(Dispatchers.IO) {
-                    ServiceLocator.getDbInstance().ratingDao.getAverageRatingById(movieId)
-                }
+                    val averageRating = withContext(Dispatchers.IO) {
+                        ServiceLocator.getDbInstance().ratingDao.getAverageRatingById(movieId)
+                    }
 
-                filmRatingRb.rating = userRating ?: 0.0f
+                    filmRatingRb.rating = userRating ?: 0.0f
 
-                averageRatingTv.text = averageRating.toString()
+                    averageRatingTv.text = averageRating.toString()
 
-                goBackBtn.setOnClickListener {
-                    findNavController().navigateUp()
-                }
+                    goBackBtn.setOnClickListener {
+                        findNavController().navigateUp()
+                    }
 
-                filmRatingRb.setOnRatingBarChangeListener { _, rating, fromUser ->
-                    if (fromUser) {
-                        val movieRating = RatingEntity(userId!!, movie.movieId, rating)
-                        lifecycleScope.launch {
-                            withContext(Dispatchers.IO) {
-                                ServiceLocator.getDbInstance().ratingDao.addRating(movieRating)
+                    filmRatingRb.setOnRatingBarChangeListener { _, rating, fromUser ->
+                        if (fromUser) {
+                            val movieRating = RatingEntity(userId!!, movie.movieId, rating)
+                            lifecycleScope.launch {
+                                withContext(Dispatchers.IO) {
+                                    ServiceLocator.getDbInstance().ratingDao.addRating(movieRating)
+                                }
                             }
                         }
                     }
                 }
             }
         }
-    }
     }
 
     companion object {

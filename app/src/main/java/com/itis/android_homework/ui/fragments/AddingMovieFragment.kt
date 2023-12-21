@@ -2,7 +2,6 @@ package com.itis.android_homework.ui.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itis.android_homework.R
@@ -59,11 +58,5 @@ class AddingMovieFragment : BaseFragment(R.layout.fragment_adding_movie){
             }
         }
     }
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
 
-    companion object {
-        const val ADDING_MOVIE_FRAGMENT_TAG = "ADDING_MOVIE_FRAGMENT_TAG"
-    }
 }
