@@ -4,10 +4,10 @@ import android.text.Editable
 import android.text.TextWatcher
 
 class CurrencyTextWatcher : TextWatcher {
-    var stringBuilder : StringBuilder = java.lang.StringBuilder()
-    var ignore : Boolean = false
+    var stringBuilder: StringBuilder = java.lang.StringBuilder()
+    var ignore: Boolean = false
 
-    private val numPlace : Char = 'X'
+    private val numPlace: Char = 'X'
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -30,7 +30,7 @@ class CurrencyTextWatcher : TextWatcher {
     private fun removeFormat(text: String) {
         stringBuilder.setLength(0)
         for (i in 0 until text.length) {
-            val c : Char = text[i]
+            val c: Char = text[i]
             if (isNumberChar(c)) {
                 stringBuilder.append(c)
             }
@@ -65,5 +65,5 @@ class CurrencyTextWatcher : TextWatcher {
             return "+X (XXX)-XXX-XX-XX"
         } else "+XXX (XXX)-XX-XX-XX"
     }
-
 }
+//https://maximumwallhd.com/wp-content/uploads/2015/08/fonds-ecran-fight-club-9.jpg
