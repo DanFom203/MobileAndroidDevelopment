@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AndroidHomework</string>
+    <string name="submit">Submit</string>
+    <string name="number_of_elements">Number Of Elements</string>
+    <string name="first_screen">First Screen</string>
+    <string name="invalid_count">INVALID COUNT</string>
+    <string name="element">Element</string>
+    <string name="second_screen">Second Screen</string>
+    <string name="go_back">Go Back</string>
 </resources>
