@@ -1,0 +1,14 @@
+package com.itis.android_homework.data.remote
+
+import com.itis.android_homework.data.remote.pojo.response.WeatherResponse
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface OpenWeatherApi {
+
+    @GET("weather")
+    suspend fun getCurrentWeatherByCity(
+        @Query(value = "q") city: String,
+    ): WeatherResponse?
+
+}
