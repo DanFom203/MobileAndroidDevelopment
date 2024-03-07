@@ -45,7 +45,6 @@ class MainActivity : BaseActivity() {
                     this.remove(destination)
                 }
 
-                else -> Unit
             }
             if (isAddToBackStack) {
                 this.addToBackStack(null)
