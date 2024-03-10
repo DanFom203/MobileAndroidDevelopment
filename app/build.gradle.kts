@@ -1,20 +1,35 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
     namespace = "com.itis.android_homework"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.itis.android_homework"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "OPEN_WEATHER_BASE_URL", "\"https://api.openweathermap.org/data/2.5/\"")
+        buildConfigField("String", "OPEN_WEATHER_ICON_URL", "\"https://api.openweathermap.org/img/w/\"")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true"
+                )
+
+            }
+        }
     }
 
     buildTypes {
@@ -33,6 +48,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -44,6 +64,32 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
+
+    val viewBindingDelegateVersion = "1.5.9"
+    implementation("com.github.kirich1409:viewbindingpropertydelegate-noreflection:$viewBindingDelegateVersion")
+
+    val roomVersion = "2.6.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    "kapt"("androidx.room:room-compiler:$roomVersion")
+
+    val coroutinesVersion = "1.3.9"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+
+    val gsonVersion = "2.10.1"
+    implementation("com.google.code.gson:gson:$gsonVersion")
+
+    val retrofitVersion = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    val loggingVersion = "4.12.0"
+    implementation("com.squareup.okhttp3:logging-interceptor:$loggingVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
