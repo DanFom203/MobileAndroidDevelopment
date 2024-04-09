@@ -8,9 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.bumptech.glide.Glide
-import com.itis.android_homework.BuildConfig
 import com.itis.android_homework.R
 import com.itis.android_homework.databinding.FragmentWeatherInfoBinding
 import com.itis.android_homework.presentation.adapter.WeatherListAdapter
@@ -21,7 +20,6 @@ import com.itis.android_homework.presentation.screens.debugmenu.DebugMenuFragmen
 import com.itis.android_homework.presentation.screens.weatherdetails.WeatherDetailsFragment
 import com.itis.android_homework.utils.ActionType
 import com.itis.android_homework.utils.CitiesRepository
-import com.itis.android_homework.utils.ResManager
 import com.itis.android_homework.utils.ResManagerImpl
 import com.itis.android_homework.utils.appComponent
 import kotlinx.coroutines.channels.consumeEach
@@ -46,6 +44,8 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
 
     private val cities = CitiesRepository.citiesList
 
+    private var citiesWeatherAdapter: WeatherListAdapter? = null
+
     override fun onAttach(context: Context) {
         requireContext().appComponent.inject(fragment = this)
         super.onAttach(context)
@@ -54,20 +54,19 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewBinding) {
-            val adapter = WeatherListAdapter(
+            citiesWeatherAdapter = WeatherListAdapter(
                 actionNext = ::onWeatherClick,
                 resManager = resManager
             )
-            citiesRv.adapter = adapter
-            startWeatherUpdateTimer()
+            citiesRv.adapter = citiesWeatherAdapter
             weatherHeaderTv.setOnLongClickListener {
                 handleDebugClick()
                 true
             }
 
             loadingProgressBar.visibility = View.VISIBLE
-            viewModel.getWeatherInfo(cities = cities)
 
+            startWeatherUpdate(cities = cities)
         }
     }
 
@@ -78,51 +77,47 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
         )
     }
 
-    private fun startWeatherUpdateTimer() {
+    private fun startWeatherUpdate(cities: List<String>) {
         val timer = Timer()
         val timerTask = object : TimerTask() {
             override fun run() {
-                // Вызываем observeData каждые 10 минут
+                viewModel.getWeatherInfo(cities = cities)
                 observerData()
             }
         }
-        // Запускаем таймер с начальной задержкой в 0 мс и периодом в 10 минут
         timer.schedule(timerTask, 0, 10 * 60 * 1000)
     }
 
-//    private fun observerData() {
-//        with(viewModel) {
-//
-//            /** Использование Flow вместе с кастомным extension
-//             * @see utils/Extensions
-//             * @see BaseFragment
-//             **/
-//
-//            currentWeatherFlow.observe { weatherData ->
-//                weatherData?.let {
-//                    with(viewBinding) {
-//                        weatherTempTv.text = buildString {
-//                            append(getString(R.string.temperature))
-//                            append(" : ")
-//                            append(it.mainData.temperature)
-//                        }
-//
-//                        showTempIcon(it.iconData.icon)
-//                        loadingProgressBar.visibility = View.GONE
-//                    }
-//                }
-//            }
-//
-//            lifecycleScope.launch {
-//                errorsChannel.consumeEach { error ->
-//                    val errorMessage = error.message ?: getString(R.string.unknown_error)
-//                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
-//                    viewBinding.loadingProgressBar.visibility = View.GONE
-//                }
-//            }
-//
-//        }
-//    }
+    private fun observerData() {
+        with(viewModel) {
+
+            /** Использование Flow вместе с кастомным extension
+             * @see utils/Extensions
+             * @see BaseFragment
+             **/
+
+            currentWeatherFlow.observe { weatherData ->
+                weatherData?.let {
+                    with(viewBinding) {
+                        val weatherCitiesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                        citiesRv.layoutManager = weatherCitiesLayoutManager
+                        citiesRv.adapter = citiesWeatherAdapter
+                        citiesWeatherAdapter?.submitList(it)
+                        loadingProgressBar.visibility = View.GONE
+                    }
+                }
+            }
+
+            lifecycleScope.launch {
+                errorsChannel.consumeEach { error ->
+                    val errorMessage = error.message ?: getString(R.string.unknown_error)
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                    viewBinding.loadingProgressBar.visibility = View.GONE
+                }
+            }
+
+        }
+    }
 
     private fun handleDebugClick() {
         debugClickCount++
@@ -153,15 +148,4 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
         )
     }
 
-//    private fun showTempIcon(icon: String) {
-//        viewBinding.imageCv.visibility = View.VISIBLE
-//        Glide.with(requireContext())
-//            .load(
-//                buildString {
-//                    append(BuildConfig.OPEN_WEATHER_ICON_URL)
-//                    append(icon)
-//                    append(".png")
-//                })
-//            .into(viewBinding.weatherIconIv)
-//    }
 }

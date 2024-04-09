@@ -1,15 +1,10 @@
 package com.itis.android_homework.presentation.holder
 
 import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itis.android_homework.R
 import com.itis.android_homework.databinding.ItemCityBinding
 import com.itis.android_homework.presentation.model.WeatherUiModel
-import com.itis.android_homework.utils.ResManager
-import com.itis.android_homework.utils.ResManagerImpl
-import javax.inject.Inject
 
 class WeatherHolder(
     private val binding: ItemCityBinding,

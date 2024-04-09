@@ -26,8 +26,6 @@ class WeatherDetailsFragment : BaseFragment(R.layout.fragment_weather_details) {
 
     private val viewBinding: FragmentWeatherDetailsBinding by viewBinding(FragmentWeatherDetailsBinding::bind)
 
-    private var debugClickCount = 0
-
     private val viewModel: WeatherDetailsViewModel by lazyViewModel {
         requireContext().appComponent.weatherDetailsInfoViewModel().create(weatherId = "Some Assisted Value")
     }
@@ -48,76 +46,46 @@ class WeatherDetailsFragment : BaseFragment(R.layout.fragment_weather_details) {
         super.onViewCreated(view, savedInstanceState)
         with(viewBinding) {
             observerData()
-            weatherHeaderTv.setOnLongClickListener {
-                handleDebugClick()
-                true
-            }
 
             weatherScreenActionBtn.setOnClickListener {
                 loadingProgressBar.visibility = android.view.View.VISIBLE
-                viewModel.getWeatherInfo(city = cityNameFieldTv.text.toString())
+//                viewModel.getWeatherInfo(city = cityNameFieldTv.text.toString())
             }
         }
     }
 
     private fun observerData() {
-        with(viewModel) {
-
-            /** Использование Flow вместе с кастомным extension
-             * @see utils/Extensions
-             * @see BaseFragment
-             **/
-
-            currentWeatherFlow.observe { weatherData ->
-                weatherData?.let {
-                    with(viewBinding) {
-                        weatherTempTv.text = buildString {
-                            append(getString(R.string.temperature))
-                            append(" : ")
-                            append(it.mainData.temperature)
-                        }
-
-                        showTempIcon(it.iconData.icon)
-                        loadingProgressBar.visibility = View.GONE
-                    }
-                }
-            }
-
-            lifecycleScope.launch {
-                errorsChannel.consumeEach { error ->
-                    val errorMessage = error.message ?: getString(R.string.unknown_error)
-                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
-                    viewBinding.loadingProgressBar.visibility = View.GONE
-                }
-            }
-
-        }
-    }
-
-    private fun handleDebugClick() {
-        debugClickCount++
-        if (debugClickCount > 2) {
-            enterDebugMenu()
-        } else {
-            Toast.makeText(requireContext(),
-                buildString {
-                    append(getString(R.string.long_tap))
-                    append(" : ")
-                    append("$debugClickCount")
-                },
-                Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun enterDebugMenu() {
-
-        Toast.makeText(requireContext(), getString(R.string.debug_menu_toast), Toast.LENGTH_SHORT).show()
-
-        (requireActivity() as? BaseActivity)?.goToScreen(
-            actionType = ActionType.REPLACE,
-            destination = DebugMenuFragment(),
-            isAddToBackStack = true
-        )
+//        with(viewModel) {
+//
+//            /** Использование Flow вместе с кастомным extension
+//             * @see utils/Extensions
+//             * @see BaseFragment
+//             **/
+//
+//            currentWeatherFlow.observe { weatherData ->
+//                weatherData?.let {
+//                    with(viewBinding) {
+//                        weatherTempTv.text = buildString {
+//                            append(getString(R.string.temperature))
+//                            append(" : ")
+//                            append(it.mainData.temperature)
+//                        }
+//
+//                        showTempIcon(it.iconData.icon)
+//                        loadingProgressBar.visibility = View.GONE
+//                    }
+//                }
+//            }
+//
+//            lifecycleScope.launch {
+//                errorsChannel.consumeEach { error ->
+//                    val errorMessage = error.message ?: getString(R.string.unknown_error)
+//                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+//                    viewBinding.loadingProgressBar.visibility = View.GONE
+//                }
+//            }
+//
+//        }
     }
 
     private fun showTempIcon(icon: String) {
