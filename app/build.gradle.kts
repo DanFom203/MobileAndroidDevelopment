@@ -78,9 +78,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    val lifecycleVersion = "2.7.0"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
-    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+
+    val glideVersion = "4.15.1"
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
 
     val gsonVersion = "2.10.1"
     implementation("com.google.code.gson:gson:$gsonVersion")
@@ -90,6 +94,10 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     val loggingVersion = "4.12.0"
     implementation("com.squareup.okhttp3:logging-interceptor:$loggingVersion")
+
+    val daggerVersion = "2.51"
+    implementation("com.google.dagger:dagger:$daggerVersion")
+    "kapt"("com.google.dagger:dagger-compiler:$daggerVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

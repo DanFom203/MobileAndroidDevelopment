@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.itis.android_homework.utils.observe
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 
 
 abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
@@ -52,5 +55,9 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
 
     private fun showMessageInConsole(message: String) {
         println("TEST TAG - $message ${this.javaClass.canonicalName}")
+    }
+
+    inline fun <T> Flow<T>.observe(crossinline block: (T) -> Unit): Job {
+        return observe(fragment = this@BaseFragment, block)
     }
 }

@@ -8,13 +8,14 @@ import com.itis.android_homework.domain.repository.WeatherRepository
 import com.itis.android_homework.data.remote.OpenWeatherApi
 import com.itis.android_homework.domain.model.WeatherDomainModel
 import com.itis.android_homework.domain.model.isEmptyResponse
-import com.itis.android_homework.utils.ResManager
+import com.itis.android_homework.utils.ResManagerImpl
+import javax.inject.Inject
 
 
-class WeatherRepositoryImpl(
+class WeatherRepositoryImpl @Inject constructor(
     private val api: OpenWeatherApi,
     private val domainModelMapper: WeatherDomainModelMapper,
-    private val resManager: ResManager,
+    private val resManager: ResManagerImpl,
 ) : WeatherRepository {
 
     override suspend fun getCurrentWeatherByCityName(city: String): WeatherDomainModel {
@@ -26,5 +27,9 @@ class WeatherRepositoryImpl(
         } else {
             throw EmptyWeatherResponseException(message = resManager.getString(R.string.empty_weather_response))
         }
+    }
+
+    override suspend fun getDailyForecast16(query: String): Any {
+        return ""
     }
 }

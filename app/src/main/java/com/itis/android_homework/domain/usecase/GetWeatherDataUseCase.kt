@@ -5,8 +5,9 @@ import com.itis.android_homework.domain.repository.WeatherRepository
 import com.itis.android_homework.presentation.model.WeatherUiModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class GetWeatherDataUseCase(
+class GetWeatherDataUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val repository: WeatherRepository,
     private val mapper: WeatherUiModelMapper,

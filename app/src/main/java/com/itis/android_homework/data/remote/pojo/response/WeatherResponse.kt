@@ -3,6 +3,10 @@ package com.itis.android_homework.data.remote.pojo.response
 import com.google.gson.annotations.SerializedName
 
 class WeatherResponse(
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("coord")
+    val coordData: CoordData? = null,
     @SerializedName("main")
     val mainData: MainData? = null,
     @SerializedName("weather")
@@ -21,4 +25,11 @@ class MainData(
 class IconData(
     @SerializedName("icon")
     val icon: String? = null
+)
+
+class CoordData(
+    @SerializedName("lon")
+    val longitude: Float? = null,
+    @SerializedName("lat")
+    val latitude: Float? = null,
 )

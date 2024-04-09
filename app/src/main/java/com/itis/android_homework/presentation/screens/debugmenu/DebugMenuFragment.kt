@@ -1,4 +1,4 @@
-package com.itis.android_homework.presentation.screens
+package com.itis.android_homework.presentation.screens.debugmenu
 
 import android.os.Build
 import android.os.Bundle

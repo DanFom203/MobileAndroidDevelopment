@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">AndroidHomework</string>
     <string name="weather">Weather</string>
-    <string name="enter_the_name_of_your_city">Enter the name of your city</string>
-    <string name="confirm">Confirm</string>
+    <string name="city_name">City name</string>
+    <string name="go_back">Back</string>
     <string name="temperature">Current temperature</string>
     <string name="back">Back</string>
     <string name="app_name_header">Application name:</string>
@@ -10,6 +10,10 @@
     <string name="version">Version:</string>
     <string name="device">Device:</string>
     <string name="android_version">Android:</string>
+    <string name="debug_menu_toast">Entering the debugging menu!</string>
+    <string name="long_tap">Long tap</string>
+
+
     <!-- Errors -->
     <string name="bad_request">Bad request</string>
     <string name="internal_server_error">The server cannot process the request</string>
@@ -17,6 +21,6 @@
     <string name="empty_weather_response">There is no weather data in the specified city</string>
     <string name="user_not_authorized">You are not authorized</string>
     <string name="too_many_requests">Exceeded the number of request attempts</string>
-
+    <string name="unknown_error">Unknown error</string>
 
 </resources>

@@ -11,4 +11,9 @@ interface OpenWeatherApi {
         @Query(value = "q") city: String,
     ): WeatherResponse?
 
+    @GET("forecast")
+    suspend fun get5DayForecast(
+        @Query(value = "q") city: String,
+    ): WeatherResponse?
+
 }

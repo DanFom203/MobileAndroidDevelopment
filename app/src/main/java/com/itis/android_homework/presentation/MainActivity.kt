@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.itis.android_homework.R
 import com.itis.android_homework.presentation.base.BaseActivity
 import com.itis.android_homework.presentation.base.BaseFragment
-import com.itis.android_homework.presentation.screens.WeatherInfoFragment
+import com.itis.android_homework.presentation.screens.weatherinfo.WeatherInfoFragment
 import com.itis.android_homework.utils.ActionType
 
 class MainActivity : BaseActivity() {
@@ -15,14 +15,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .add(
-                    fragmentContainerId,
-                    WeatherInfoFragment(),
-                )
-                .commit()
-        }
     }
 
     override fun goToScreen(

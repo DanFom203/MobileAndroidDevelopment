@@ -2,11 +2,12 @@ package com.itis.android_homework.data
 
 import com.itis.android_homework.R
 import com.itis.android_homework.data.exceptions.ApiException
-import com.itis.android_homework.utils.ResManager
+import com.itis.android_homework.utils.ResManagerImpl
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class ExceptionHandlerDelegate(
-    private val resManager: ResManager,
+class ExceptionHandlerDelegate @Inject constructor(
+    private val resManager: ResManagerImpl,
 ) {
 
     fun handleException(ex: Throwable): Throwable {
