@@ -20,6 +20,7 @@ import com.itis.android_homework.presentation.model.WeatherUiModel
 import com.itis.android_homework.presentation.screens.debugmenu.DebugMenuFragment
 import com.itis.android_homework.presentation.screens.weatherdetails.WeatherDetailsFragment
 import com.itis.android_homework.utils.ActionType
+import com.itis.android_homework.utils.CitiesRepository
 import com.itis.android_homework.utils.ResManager
 import com.itis.android_homework.utils.ResManagerImpl
 import com.itis.android_homework.utils.appComponent
@@ -43,6 +44,8 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
 
     private var debugClickCount = 0
 
+    private val cities = CitiesRepository.citiesList
+
     override fun onAttach(context: Context) {
         requireContext().appComponent.inject(fragment = this)
         super.onAttach(context)
@@ -63,7 +66,7 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
             }
 
             loadingProgressBar.visibility = View.VISIBLE
-            viewModel.getWeatherInfo(city = )
+            viewModel.getWeatherInfo(cities = cities)
 
         }
     }

@@ -13,11 +13,23 @@ class GetWeatherDataUseCase @Inject constructor(
     private val mapper: WeatherUiModelMapper,
 ) {
 
-    suspend operator fun invoke(city: String): WeatherUiModel {
-        return withContext(dispatcher) {
-            val weatherData = repository.getCurrentWeatherByCityName(city = city)
-            mapper.mapDomainToUiModel(weatherData)
+    suspend operator fun invoke(cities: List<String>): List<WeatherUiModel> {
+//        val citiesWeather: List<WeatherUiModel>
+//        withContext(dispatcher) {
+//            val weatherData = repository.getCurrentWeatherByCityName(city = city)
+//            (mapper.mapDomainToUiModel(weatherData))
+//        }
+        val citiesWeather = mutableListOf<WeatherUiModel>()
+
+        withContext(dispatcher) {
+            cities.forEach { city ->
+                val weatherData = repository.getCurrentWeatherByCityName(city = city)
+                val weatherUiModel = mapper.mapDomainToUiModel(weatherData)
+                citiesWeather.add(weatherUiModel)
+            }
         }
+
+        return citiesWeather
     }
 
 }

@@ -6,6 +6,7 @@ import com.itis.android_homework.data.runCatching
 import com.itis.android_homework.domain.usecase.GetWeatherDataUseCase
 import com.itis.android_homework.presentation.base.BaseViewModel
 import com.itis.android_homework.presentation.model.WeatherUiModel
+import com.itis.android_homework.utils.CitiesRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,10 +24,10 @@ class WeatherInfoViewModel @Inject constructor(
 
     val errorsChannel = Channel<Throwable>()
 
-    fun getWeatherInfo(city: String) {
+    fun getWeatherInfo(cities: List<String>) {
         viewModelScope.launch {
             runCatching(exceptionHandlerDelegate) {
-                getWeatherDataUseCase.invoke(city)
+                getWeatherDataUseCase.invoke(cities)
             }.onSuccess {
                 _currentWeatherFlow.value = it
             }.onFailure {
