@@ -10,7 +10,6 @@ import com.itis.android_homework.databinding.ItemCityBinding
 import com.itis.android_homework.presentation.holder.WeatherHolder
 import com.itis.android_homework.presentation.model.WeatherUiModel
 import com.itis.android_homework.utils.ResManagerImpl
-import javax.inject.Inject
 
 class WeatherListAdapter(
     private val actionNext: (WeatherUiModel) -> Unit,
@@ -34,7 +33,8 @@ class WeatherListAdapter(
     ): RecyclerView.ViewHolder {
         return WeatherHolder(
             binding = ItemCityBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            actionNext = actionNext
+            actionNext = actionNext,
+            resManager = resManager
         )
     }
 

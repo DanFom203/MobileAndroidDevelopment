@@ -1,6 +1,6 @@
 package com.itis.android_homework.domain.mapper
 
-import com.itis.android_homework.domain.model.WeatherDomainModel
+import com.itis.android_homework.domain.model.weathermodel.WeatherDomainModel
 import com.itis.android_homework.presentation.model.WeatherCoordUiModel
 import com.itis.android_homework.presentation.model.WeatherIconUiModel
 import com.itis.android_homework.presentation.model.WeatherMainUiModel

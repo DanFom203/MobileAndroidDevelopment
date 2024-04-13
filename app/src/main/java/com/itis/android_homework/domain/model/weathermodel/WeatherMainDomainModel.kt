@@ -1,4 +1,4 @@
-package com.itis.android_homework.domain.model
+package com.itis.android_homework.domain.model.weathermodel
 
 data class WeatherMainDomainModel(
     val temperature: Float,

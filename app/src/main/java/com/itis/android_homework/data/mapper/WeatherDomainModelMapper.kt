@@ -2,10 +2,10 @@ package com.itis.android_homework.data.mapper
 
 import com.itis.android_homework.base.Constants
 import com.itis.android_homework.data.remote.pojo.response.WeatherResponse
-import com.itis.android_homework.domain.model.WeatherCoordDomainModel
-import com.itis.android_homework.domain.model.WeatherDomainModel
-import com.itis.android_homework.domain.model.WeatherIconDomainModel
-import com.itis.android_homework.domain.model.WeatherMainDomainModel
+import com.itis.android_homework.domain.model.weathermodel.WeatherCoordDomainModel
+import com.itis.android_homework.domain.model.weathermodel.WeatherDomainModel
+import com.itis.android_homework.domain.model.weathermodel.WeatherIconDomainModel
+import com.itis.android_homework.domain.model.weathermodel.WeatherMainDomainModel
 import javax.inject.Inject
 
 class WeatherDomainModelMapper @Inject constructor() {

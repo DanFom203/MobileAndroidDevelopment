@@ -13,19 +13,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.itis.android_homework.R
 import com.itis.android_homework.databinding.FragmentWeatherInfoBinding
 import com.itis.android_homework.presentation.adapter.WeatherListAdapter
-import com.itis.android_homework.presentation.base.BaseActivity
 import com.itis.android_homework.presentation.base.BaseFragment
 import com.itis.android_homework.presentation.model.WeatherUiModel
-import com.itis.android_homework.presentation.screens.debugmenu.DebugMenuFragment
 import com.itis.android_homework.presentation.screens.weatherdetails.WeatherDetailsFragment
-import com.itis.android_homework.utils.ActionType
-import com.itis.android_homework.utils.CitiesRepository
 import com.itis.android_homework.utils.ResManagerImpl
 import com.itis.android_homework.utils.appComponent
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
-import java.util.Timer
-import java.util.TimerTask
 import javax.inject.Inject
 
 class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
@@ -42,8 +36,6 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
 
     private var debugClickCount = 0
 
-    private val cities = CitiesRepository.citiesList
-
     private var citiesWeatherAdapter: WeatherListAdapter? = null
 
     override fun onAttach(context: Context) {
@@ -54,6 +46,8 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewBinding) {
+            loadingProgressBar.visibility = View.VISIBLE
+            observerData()
             citiesWeatherAdapter = WeatherListAdapter(
                 actionNext = ::onWeatherClick,
                 resManager = resManager
@@ -64,28 +58,19 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
                 true
             }
 
-            loadingProgressBar.visibility = View.VISIBLE
-
-            startWeatherUpdate(cities = cities)
         }
     }
 
     private fun onWeatherClick(weatherUiModel: WeatherUiModel) {
         findNavController().navigate(
             R.id.action_weatherInfoFragment_to_weatherDetailsFragment,
-            WeatherDetailsFragment.createBundle(weatherUiModel.mainData.temperature)
+            WeatherDetailsFragment.createBundle(
+                weatherIcon = weatherUiModel.iconData.icon,
+                weatherLong = weatherUiModel.coordsData.longitude,
+                weatherLat = weatherUiModel.coordsData.latitude,
+                cityTemperature = weatherUiModel.mainData.temperature
+            )
         )
-    }
-
-    private fun startWeatherUpdate(cities: List<String>) {
-        val timer = Timer()
-        val timerTask = object : TimerTask() {
-            override fun run() {
-                viewModel.getWeatherInfo(cities = cities)
-                observerData()
-            }
-        }
-        timer.schedule(timerTask, 0, 10 * 60 * 1000)
     }
 
     private fun observerData() {
@@ -122,6 +107,7 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
     private fun handleDebugClick() {
         debugClickCount++
         if (debugClickCount > 2) {
+            debugClickCount = 0
             enterDebugMenu()
         } else {
             Toast.makeText(requireContext(),
@@ -138,11 +124,6 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
 
         Toast.makeText(requireContext(), getString(R.string.debug_menu_toast), Toast.LENGTH_SHORT).show()
 
-        (requireActivity() as? BaseActivity)?.goToScreen(
-            actionType = ActionType.REPLACE,
-            destination = DebugMenuFragment(),
-            isAddToBackStack = true
-        )
         findNavController().navigate(
             R.id.action_weatherInfoFragment_to_debugMenuFragment
         )

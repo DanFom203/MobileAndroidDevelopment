@@ -1,7 +1,6 @@
 package com.itis.android_homework.utils
 
 import android.content.Context
-import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -14,10 +13,6 @@ import com.itis.android_homework.di.components.AppComponent
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-
-fun Int.getValueInPx(dm: DisplayMetrics): Int {
-    return (this * dm.density).toInt()
-}
 
 inline fun <T> Flow<T>.observe(fragment: Fragment, crossinline block: (T) -> Unit): Job {
     val lifecycleOwner = fragment.viewLifecycleOwner

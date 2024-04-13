@@ -22,5 +22,7 @@
     <string name="user_not_authorized">You are not authorized</string>
     <string name="too_many_requests">Exceeded the number of request attempts</string>
     <string name="unknown_error">Unknown error</string>
+    <string name="date_and_time">Date and time</string>
+    <string name="feels_like">Feels like</string>
 
 </resources>
