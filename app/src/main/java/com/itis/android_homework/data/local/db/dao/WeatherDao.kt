@@ -8,6 +8,6 @@ import com.itis.android_homework.data.local.db.entity.WeatherEntity
 interface WeatherDao {
 
     @Query("SELECT * FROM weather_data")
-    fun getSavedWeatherData(): WeatherEntity?
+    suspend fun getSavedWeatherData(): WeatherEntity?
 
 }

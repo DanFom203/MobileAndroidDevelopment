@@ -58,6 +58,7 @@ class DebugMenuFragment : BaseFragment(R.layout.fragment_debug) {
             debugScreenActionBtn.setOnClickListener{
                 findNavController().popBackStack()
             }
+
         }
     }
 }

@@ -18,4 +18,7 @@ class DatabaseModule {
 
     @Provides
     fun provideWeatherDao(db: InceptionDatabase) = db.weatherDao
+
+    @Provides
+    fun provideApiRequestDao(db: InceptionDatabase) = db.apiRequestDao
 }
