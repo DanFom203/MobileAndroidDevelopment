@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main_graph"
+    app:startDestination="@id/weatherInfoFragment">
+
+
+    <fragment
+        android:id="@+id/weatherInfoFragment"
+        android:name="com.itis.android_homework.presentation.screens.weatherinfo.WeatherInfoFragment"
+        android:label="fragment_weather_info"
+        tools:layout="@layout/fragment_weather_info" >
+        <action
+            android:id="@+id/action_weatherInfoFragment_to_weatherDetailsFragment"
+            app:destination="@id/weatherDetailsFragment" />
+        <action
+            android:id="@+id/action_weatherInfoFragment_to_debugMenuFragment"
+            app:destination="@id/debugMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherDetailsFragment"
+        android:name="com.itis.android_homework.presentation.screens.weatherdetails.WeatherDetailsFragment"
+        android:label="fragment_weather_details"
+        tools:layout="@layout/fragment_weather_details" >
+        <action
+            android:id="@+id/action_weatherDetailsFragment_to_weatherInfoFragment"
+            app:destination="@id/weatherInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/debugMenuFragment"
+        android:name="com.itis.android_homework.presentation.screens.debugmenu.DebugMenuFragment"
+        android:label="fragment_debug"
+        tools:layout="@layout/fragment_debug" >
+        <action
+            android:id="@+id/action_debugMenuFragment_to_weatherInfoFragment"
+            app:destination="@id/weatherInfoFragment" />
+    </fragment>
+</navigation>
