@@ -75,12 +75,6 @@ class WeatherInfoFragment : BaseFragment(R.layout.fragment_weather_info) {
 
     private fun observerData() {
         with(viewModel) {
-
-            /** Использование Flow вместе с кастомным extension
-             * @see utils/Extensions
-             * @see BaseFragment
-             **/
-
             currentWeatherFlow.observe { weatherData ->
                 weatherData?.let {
                     with(viewBinding) {

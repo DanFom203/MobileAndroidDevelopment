@@ -3,7 +3,6 @@ package com.itis.android_homework.data.remote
 import android.annotation.SuppressLint
 import com.itis.android_homework.BuildConfig
 import com.itis.android_homework.data.remote.interceptors.AppIdInterceptor
-import com.itis.android_homework.data.remote.interceptors.CustomHttpLoggingInterceptor
 import com.itis.android_homework.data.remote.interceptors.MetricInterceptor
 import dagger.Module
 import dagger.Provides
@@ -35,11 +34,6 @@ class NetworkModule {
             clientBuilder.addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-        }
-        if (BuildConfig.DEBUG) {
-            val loggingInterceptor = CustomHttpLoggingInterceptor()
-//            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            clientBuilder.addInterceptor(loggingInterceptor)
         }
         return clientBuilder.build()
     }
