@@ -142,11 +142,11 @@ class ContactBottomSheet : BottomSheetDialogFragment() {
     private fun sendMessage(phoneNumber: String?) {
         val toSms = "smsto:$phoneNumber"
 
-//        val city = requireArguments().getString(Keys.CITY_NAME_KEY) ?: ""
+        val city = requireArguments().getString(Keys.CITY_NAME_KEY) ?: ""
         val weatherLong = requireArguments().getFloat(Keys.CITY_LONG_KEY)
         val weatherLat = requireArguments().getFloat(Keys.CITY_LAT_KEY)
         val temp = requireArguments().getFloat(Keys.CITY_TEMPERATURE_KEY)
-        val message = "City: ($weatherLat, $weatherLong), Temp: $temp"
+        val message = "City: $city ($weatherLat, $weatherLong), Temp: $temp"
 
         val smsIntent = Intent(Intent.ACTION_SENDTO, Uri.parse(toSms))
         smsIntent.putExtra(Keys.MESSAGE_KEY, message)
@@ -166,8 +166,9 @@ class ContactBottomSheet : BottomSheetDialogFragment() {
     }
 
     companion object {
-        fun newInstance(weatherLong: Float, weatherLat: Float, temp: Float) = ContactBottomSheet().apply {
+        fun newInstance(city: String, weatherLong: Float, weatherLat: Float, temp: Float) = ContactBottomSheet().apply {
             arguments = bundleOf(
+                Keys.CITY_NAME_KEY to city,
                 Keys.CITY_LAT_KEY to weatherLat,
                 Keys.CITY_LONG_KEY to weatherLong,
                 Keys.CITY_TEMPERATURE_KEY to temp

@@ -124,8 +124,8 @@ class WeatherDetailsFragment : BaseFragment(R.layout.fragment_weather_details) {
         val weatherLat = arguments?.getFloat(Keys.CITY_LAT_KEY) ?: Constants.EMPTY_FLOAT_DATA
         val temp = arguments?.getFloat(Keys.CITY_TEMPERATURE_KEY) ?: Constants.EMPTY_FLOAT_DATA
 
-        val contactBottomSheet = ContactBottomSheet.newInstance(weatherLong, weatherLat, temp)
-        contactBottomSheet.show(parentFragmentManager, "ContactBottomSheet")
+        val contactBottomSheet = ContactBottomSheet.newInstance(currentCityName, weatherLong, weatherLat, temp)
+        contactBottomSheet.show(parentFragmentManager, CONTACT_BOTTOM_SHEET_KEY)
     }
 
     private fun checkPermissions(): Boolean {

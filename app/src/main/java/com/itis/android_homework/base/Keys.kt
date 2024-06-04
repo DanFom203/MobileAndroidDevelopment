@@ -9,5 +9,5 @@ object Keys {
     const val CITY_LAT_KEY = "city_lat"
     const val CITY_TEMPERATURE_KEY = "city_temp"
     const val CITY_NAME_KEY = "city_name"
-    const val MESSAGE_KEY = "message"
+    const val MESSAGE_KEY = "sms_body"
 }
