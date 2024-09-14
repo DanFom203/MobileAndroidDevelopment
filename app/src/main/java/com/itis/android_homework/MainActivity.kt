@@ -3,8 +3,7 @@ package com.itis.android_homework
 import android.os.Bundle
 import com.itis.android_homework.base.BaseActivity
 import com.itis.android_homework.base.BaseFragment
-import com.itis.android_homework.fragments.FirstPageFragment
-
+import com.itis.android_homework.fragments.FirstComposePageFragment
 import com.itis.android_homework.utils.ActionType
 
 class MainActivity : BaseActivity() {
@@ -19,8 +18,8 @@ class MainActivity : BaseActivity() {
             supportFragmentManager.beginTransaction()
                 .add(
                     fragmentContainerId,
-                    FirstPageFragment.newInstance(),
-                    FirstPageFragment.FIRST_PAGE_FRAGMENT_TAG,
+                    FirstComposePageFragment.newInstance(),
+                    FirstComposePageFragment.FIRST_COMPOSE_PAGE_FRAGMENT_TAG,
                 )
                 .commit()
         }
