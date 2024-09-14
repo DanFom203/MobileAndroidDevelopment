@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AndroidHomework</string>
+    <string name="second_screen">Second Screen</string>
+    <string name="input_text">Input text</string>
+    <string name="first_screen">First Screen</string>
+    <string name="send">Send</string>
+    <string name="third_screen">Third Screen</string>
+    <string name="to_third_screen">To third screen</string>
+    <string name="to_first_screen">To first screen</string>
+    <string name="invalid_message">INVALID MESSAGE</string>
 </resources>
